@@ -1,0 +1,189 @@
+# SmogPing Example Targets Configuration
+# This file contains example targets for common network monitoring scenarios
+# Copy this to targets.toml and customize for your environment
+
+# Include additional target files (optional)
+# include = ["additional_targets.toml", "datacenter_hosts.toml"]
+
+[organizations]
+
+  # Public DNS Servers - Essential for internet connectivity monitoring
+  [organizations.PublicDNS]
+  hosts = [
+    # Google DNS
+    { name = "Google DNS Primary", ip = "8.8.8.8", alarmping = 100, alarmloss = 2, alarmjitter = 50 },
+    { name = "Google DNS Secondary", ip = "8.8.4.4", alarmping = 100, alarmloss = 2, alarmjitter = 50 },
+    
+    # Cloudflare DNS
+    { name = "Cloudflare DNS Primary", ip = "1.1.1.1", alarmping = 100, alarmloss = 2, alarmjitter = 50 },
+    { name = "Cloudflare DNS Secondary", ip = "1.0.0.1", alarmping = 100, alarmloss = 2, alarmjitter = 50 },
+    
+    # Quad9 DNS
+    { name = "Quad9 DNS Primary", ip = "9.9.9.9", alarmping = 100, alarmloss = 2, alarmjitter = 50 },
+    { name = "Quad9 DNS Secondary", ip = "149.112.112.112", alarmping = 100, alarmloss = 2, alarmjitter = 50 },
+    
+    # OpenDNS
+    { name = "OpenDNS Primary", ip = "208.67.222.222", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
+    { name = "OpenDNS Secondary", ip = "208.67.220.220", alarmping = 150, alarmloss = 3, alarmjitter = 75 }
+  ]
+
+  # Cloud Provider Endpoints - Monitor major cloud services
+  [organizations.CloudProviders]
+  hosts = [
+    # AWS
+    { name = "AWS US-East-1", ip = "ec2.us-east-1.amazonaws.com", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    { name = "AWS US-West-2", ip = "ec2.us-west-2.amazonaws.com", alarmping = 250, alarmloss = 5, alarmjitter = 125 },
+    { name = "AWS Europe", ip = "ec2.eu-west-1.amazonaws.com", alarmping = 300, alarmloss = 5, alarmjitter = 150 },
+    
+    # Google Cloud
+    { name = "Google Cloud US", ip = "compute.googleapis.com", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    { name = "Google Cloud Europe", ip = "europe-west1-a.gce.cloud.google.com", alarmping = 300, alarmloss = 5, alarmjitter = 150 },
+    
+    # Microsoft Azure
+    { name = "Azure US East", ip = "eastus.cloudapp.azure.com", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    { name = "Azure Europe", ip = "westeurope.cloudapp.azure.com", alarmping = 300, alarmloss = 5, alarmjitter = 150 },
+    
+    # DigitalOcean
+    { name = "DigitalOcean NYC", ip = "nyc1.digitaloceanspaces.com", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
+    { name = "DigitalOcean SFO", ip = "sfo2.digitaloceanspaces.com", alarmping = 200, alarmloss = 5, alarmjitter = 100 }
+  ]
+
+  # Content Delivery Networks (CDNs)
+  [organizations.CDNProviders]
+  hosts = [
+    # Cloudflare
+    { name = "Cloudflare Edge", ip = "cloudflare.com", alarmping = 100, alarmloss = 2, alarmjitter = 50 },
+    
+    # AWS CloudFront
+    { name = "AWS CloudFront", ip = "d1234567890123.cloudfront.net", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
+    
+    # Fastly
+    { name = "Fastly CDN", ip = "fastly.com", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
+    
+    # KeyCDN
+    { name = "KeyCDN", ip = "keycdn.com", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    
+    # MaxCDN/StackPath
+    { name = "StackPath CDN", ip = "stackpath.com", alarmping = 200, alarmloss = 5, alarmjitter = 100 }
+  ]
+
+  # Major Website Endpoints - Monitor popular services
+  [organizations.MajorWebsites]
+  hosts = [
+    # Search Engines
+    { name = "Google", ip = "google.com", alarmping = 100, alarmloss = 2, alarmjitter = 50 },
+    { name = "Bing", ip = "bing.com", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
+    { name = "DuckDuckGo", ip = "duckduckgo.com", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    
+    # Social Media
+    { name = "Facebook", ip = "facebook.com", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    { name = "Twitter/X", ip = "x.com", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    { name = "LinkedIn", ip = "linkedin.com", alarmping = 250, alarmloss = 5, alarmjitter = 125 },
+    
+    # Tech Companies
+    { name = "GitHub", ip = "github.com", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    { name = "Stack Overflow", ip = "stackoverflow.com", alarmping = 250, alarmloss = 5, alarmjitter = 125 },
+    { name = "Reddit", ip = "reddit.com", alarmping = 300, alarmloss = 10, alarmjitter = 150 }
+  ]
+
+  # Internet Infrastructure - Root servers and key infrastructure
+  [organizations.InternetInfrastructure]
+  hosts = [
+    # Root DNS Servers (A-M)
+    { name = "Root A (VeriSign)", ip = "198.41.0.4", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    { name = "Root B (USC-ISI)", ip = "199.9.14.201", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    { name = "Root C (Cogent)", ip = "192.33.4.12", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    { name = "Root D (UMD)", ip = "199.7.91.13", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    
+    # Internet Exchange Points (Public IPs)
+    { name = "DE-CIX Frankfurt", ip = "80.81.192.30", alarmping = 300, alarmloss = 5, alarmjitter = 150 },
+    { name = "AMS-IX Amsterdam", ip = "80.249.208.1", alarmping = 300, alarmloss = 5, alarmjitter = 150 },
+    
+    # Time Servers
+    { name = "NIST Time Server", ip = "time.nist.gov", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    { name = "Pool NTP", ip = "pool.ntp.org", alarmping = 200, alarmloss = 5, alarmjitter = 100 }
+  ]
+
+  # Network Monitoring Services
+  [organizations.MonitoringServices]
+  hosts = [
+    # Speed Test Services
+    { name = "Speedtest.net", ip = "speedtest.net", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    { name = "Fast.com", ip = "fast.com", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    
+    # Network Tools
+    { name = "Looking Glass", ip = "lg.he.net", alarmping = 250, alarmloss = 5, alarmjitter = 125 },
+    { name = "Ping Test", ip = "ping.online.net", alarmping = 300, alarmloss = 10, alarmjitter = 150 },
+    
+    # Public Monitoring
+    { name = "Pingdom", ip = "pingdom.com", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    { name = "UptimeRobot", ip = "uptimerobot.com", alarmping = 250, alarmloss = 5, alarmjitter = 125 }
+  ]
+
+  # Geographic Diversity - Test connectivity to different regions
+  [organizations.GeographicEndpoints]
+  hosts = [
+    # North America
+    { name = "Level3 Chicago", ip = "4.2.2.1", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
+    { name = "Level3 Denver", ip = "4.2.2.2", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    
+    # Europe
+    { name = "Level3 London", ip = "4.2.2.3", alarmping = 300, alarmloss = 5, alarmjitter = 150 },
+    { name = "Level3 Frankfurt", ip = "4.2.2.4", alarmping = 350, alarmloss = 5, alarmjitter = 175 },
+    
+    # Asia Pacific
+    { name = "Level3 Tokyo", ip = "4.2.2.5", alarmping = 400, alarmloss = 10, alarmjitter = 200 },
+    { name = "Level3 Singapore", ip = "4.2.2.6", alarmping = 450, alarmloss = 10, alarmjitter = 225 }
+  ]
+
+  # ISP and Tier 1 Providers
+  [organizations.ISPTier1]
+  hosts = [
+    # Tier 1 Providers
+    { name = "Verizon Business", ip = "4.69.202.123", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
+    { name = "AT&T", ip = "12.0.1.1", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
+    { name = "Level3/CenturyLink", ip = "4.2.2.1", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
+    { name = "NTT Communications", ip = "129.250.35.250", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    { name = "Cogent", ip = "38.104.1.1", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
+    
+    # Major Regional ISPs
+    { name = "Hurricane Electric", ip = "74.82.42.42", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
+    { name = "GTT (Tinet)", ip = "141.136.1.1", alarmping = 200, alarmloss = 5, alarmjitter = 100 }
+  ]
+
+  # Local Infrastructure Examples (Customize these for your environment)
+  [organizations.LocalInfrastructure]
+  hosts = [
+    # Gateway and Router Examples
+    { name = "Default Gateway", ip = "192.168.1.1", alarmping = 50, alarmloss = 1, alarmjitter = 25, alarmreceiver = "./alarmreceiver.sh" },
+    { name = "Secondary Router", ip = "192.168.1.2", alarmping = 50, alarmloss = 1, alarmjitter = 25 },
+    
+    # Local Servers Examples
+    { name = "Mail Server", ip = "mail.company.local", alarmping = 100, alarmloss = 2, alarmjitter = 50, alarmreceiver = "./alarmreceiver.sh" },
+    { name = "Web Server", ip = "web.company.local", alarmping = 100, alarmloss = 2, alarmjitter = 50, alarmreceiver = "./alarmreceiver.sh" },
+    { name = "Database Server", ip = "db.company.local", alarmping = 100, alarmloss = 2, alarmjitter = 50, alarmreceiver = "./alarmreceiver.sh" },
+    
+    # Network Equipment Examples
+    { name = "Core Switch", ip = "192.168.10.1", alarmping = 50, alarmloss = 1, alarmjitter = 25, alarmreceiver = "./alarmreceiver.sh" },
+    { name = "Wireless Controller", ip = "192.168.20.1", alarmping = 100, alarmloss = 2, alarmjitter = 50 }
+  ]
+
+# Alarm Threshold Guidelines:
+# - alarmping: Milliseconds (typical ranges: 50-500ms)
+# - alarmloss: Percentage (typical ranges: 1-20%)
+# - alarmjitter: Milliseconds (typical ranges: 25-200ms)
+# - alarmreceiver: Script path for custom alarm handling
+
+# Network Distance Guidelines:
+# - Local LAN: 1-10ms ping, 1% loss, 5-25ms jitter
+# - Local WAN: 10-50ms ping, 1-2% loss, 10-50ms jitter  
+# - Regional: 50-150ms ping, 2-5% loss, 25-100ms jitter
+# - National: 100-300ms ping, 5-10% loss, 50-200ms jitter
+# - International: 200-500ms ping, 5-20% loss, 100-300ms jitter
+
+# Pro Tips:
+# 1. Start with conservative thresholds and adjust based on actual performance
+# 2. Use different alarm receivers for different severity levels
+# 3. Group related services in the same organization
+# 4. Include both IP addresses and DNS names for comprehensive monitoring
+# 5. Monitor geographically diverse endpoints to detect regional issues

@@ -1,0 +1,38 @@
+# smogping configuration file - Contains global settings
+# Any changes you want to make should go in config.toml 
+
+# InfluxDB connection
+influx_url = "http://localhost:8086"
+influx_token = "YOUR_TOKEN"
+influx_org = "YOUR_ORG"
+influx_bucket = "YOUR_BUCKET"
+
+# InfluxDB batch size for writes
+influx_batch_size = 100
+
+# InfluxDB batch time in seconds - flush if batch_size not reached
+influx_batch_time = 10
+
+# Number of pings per datapoint
+data_point_pings = 5
+
+# Number of seconds per datapoint
+data_point_time = 60
+
+# Maximum concurrent ping operations (prevents resource exhaustion)
+max_concurrent_pings = 50
+
+# Timeout for pings in seconds
+ping_timeout = 5
+
+# IP address to send ping from, default lets the OS decide
+ping_source = "default"
+
+# How long in seconds to look for DNS IP changes
+dns_refresh = 600
+
+# Rate to send out alarm notices in seconds
+alarm_rate = 300
+
+# Alarm receiver I.E. "alarmreceiver.sh"
+alarm_receiver = "none"
