@@ -6,6 +6,8 @@ It's a spiritual successor to the venerable SmokePing. In a world of increasing 
 
 Props to Tobias Oetiker and the OG [SmokePing](https://github.com/oetiker/SmokePing)
 
+![SmogPing Dashboard](screenshot.png)
+
 ## Features
 
 - **Configuration Management**: Loads settings from configurable files with comprehensive validation
