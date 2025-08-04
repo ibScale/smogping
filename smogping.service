@@ -1,0 +1,30 @@
+[Unit]
+Description=SmogPing Network Monitoring Service
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=smogping
+Group=smogping
+WorkingDirectory=/usr/share/smogping
+EnvironmentFile=/etc/sysconfig/smogping
+ExecStart=/usr/bin/smogping $SMOGPING_ARGS
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=smogping
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/smogping
+ReadOnlyPaths=/etc/smogping
+CapabilityBoundingSet=CAP_NET_RAW
+AmbientCapabilities=CAP_NET_RAW
+
+[Install]
+WantedBy=multi-user.target
