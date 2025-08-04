@@ -29,12 +29,31 @@ echo "  Timestamp: $TIMESTAMP"
 logger -t smogping "ALARM: $HOST_NAME ($HOST_IP) - $ALARM_REASONS"
 
 # 2. Send email (requires mail command)
-# echo "Network alarm for $HOST_NAME ($HOST_IP): $ALARM_REASONS" | mail -s "SmogPing Alert" admin@example.com
+# TRACEROUTE_EMAIL=$(traceroute -m 10 $HOST_IP 2>/dev/null || echo "Traceroute failed or not available")
+# EMAIL_BODY="Network alarm for $HOST_NAME ($HOST_IP): $ALARM_REASONS
+# RTT: ${RTT_MS}ms, Loss: ${PACKET_LOSS}%, Jitter: ${JITTER_MS}ms
+# Timestamp: $TIMESTAMP
+# 
+# Traceroute to $HOST_IP:
+# $TRACEROUTE_EMAIL"
+# echo "$EMAIL_BODY" | mail -s "SmogPing Alert: $HOST_NAME" admin@example.com
 
 # 3. Send to Slack (requires curl and webhook URL)
 # SLACK_WEBHOOK="https://hooks.slack.com/services/YOUR/WEBHOOK/URL"
+# TRACEROUTE_OUTPUT=$(traceroute -m 10 $HOST_IP 2>/dev/null | head -10 || echo "Traceroute failed or not available")
+# SLACK_MESSAGE="🚨 *SmogPing Alert*
+# *Host:* $HOST_NAME ($HOST_IP)
+# *Organization:* $ORGANIZATION
+# *Issue:* $ALARM_REASONS
+# *Metrics:* RTT=${RTT_MS}ms, Loss=${PACKET_LOSS}%, Jitter=${JITTER_MS}ms
+# *Time:* $TIMESTAMP
+# 
+# *Traceroute:*
+# \`\`\`
+# $TRACEROUTE_OUTPUT
+# \`\`\`"
 # curl -X POST -H 'Content-type: application/json' \
-#   --data "{\"text\":\"🚨 SmogPing Alert: $HOST_NAME ($HOST_IP) - $ALARM_REASONS\"}" \
+#   --data "{\"text\":\"$SLACK_MESSAGE\"}" \
 #   "$SLACK_WEBHOOK"
 
 # 4. Write to alarm log file
