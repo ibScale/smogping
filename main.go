@@ -735,12 +735,20 @@ func (sp *SmogPing) loadTargets() error {
 	
 	// Load included files with validation
 	for _, includeFile := range sp.targets.Include {
-		sp.debugf("Loading included file: %s", includeFile)
+		// Resolve relative paths based on the main targets file directory
+		resolvedIncludeFile := includeFile
+		if !filepath.IsAbs(includeFile) {
+			// Make relative paths relative to the main targets file directory
+			targetsDir := filepath.Dir(sp.targetsFile)
+			resolvedIncludeFile = filepath.Join(targetsDir, includeFile)
+		}
+		
+		sp.debugf("Loading included file: %s (resolved from %s)", resolvedIncludeFile, includeFile)
 		var includedTargets TargetsConfig
 		
-		if err := sp.loadAndValidateTargetsFile(includeFile, &includedTargets, false); err != nil {
-			sp.syslogWarning("Failed to load included file %s: %v", includeFile, err)
-			log.Printf("Warning: failed to load included file %s: %v", includeFile, err)
+		if err := sp.loadAndValidateTargetsFile(resolvedIncludeFile, &includedTargets, false); err != nil {
+			sp.syslogWarning("Failed to load included file %s: %v", resolvedIncludeFile, err)
+			log.Printf("Warning: failed to load included file %s: %v", resolvedIncludeFile, err)
 			continue
 		}
 		
@@ -879,11 +887,19 @@ func (sp *SmogPing) validateTargetsContent(filename string, targets *TargetsConf
 				continue
 			}
 			
-			// Check if include file path is reasonable
-			if !isValidFilePath(includeFile) {
+			// Resolve relative paths for validation
+			resolvedIncludeFile := includeFile
+			if !filepath.IsAbs(includeFile) {
+				// Make relative paths relative to the main targets file directory
+				targetsDir := filepath.Dir(filename)
+				resolvedIncludeFile = filepath.Join(targetsDir, includeFile)
+			}
+			
+			// Check if resolved include file path is reasonable
+			if !isValidFilePath(resolvedIncludeFile) {
 				validator.AddError(&TOMLValidationError{
 					File: filename, Field: "include", Value: includeFile,
-					Message: "invalid include file path"})
+					Message: fmt.Sprintf("invalid include file path (resolved to: %s)", resolvedIncludeFile)})
 			}
 		}
 	}
@@ -1919,7 +1935,7 @@ func (sp *SmogPing) flushBatchUnsafe(reason string) {
 		sp.influxWrite.WritePoint(point)
 	}
 	
-	log.Printf("Flushed %d points to InfluxDB (reason: %s)", len(sp.batchPoints), reason)
+	sp.verbosef("Flushed %d points to InfluxDB (reason: %s)", len(sp.batchPoints), reason)
 	
 	// Reset batch
 	sp.batchPoints = sp.batchPoints[:0] // Keep capacity, reset length

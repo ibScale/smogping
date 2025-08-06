@@ -43,7 +43,24 @@ sudo mkdir -p /var/lib/smogping
 # Install binary
 echo "Installing binary to /usr/bin/smogping..."
 sudo install -m 0755 smogping /usr/bin/smogping
-sudo setcap cap_net_raw=+ep /usr/bin/smogping
+
+# Set capabilities for ICMP ping (requires libcap-utils package)
+echo "Setting capabilities for ICMP ping..."
+if command -v setcap >/dev/null 2>&1; then
+    sudo setcap cap_net_raw=+ep /usr/bin/smogping
+    echo "✓ Capabilities set successfully"
+else
+    echo "⚠ Warning: setcap command not found. Install libcap-utils package:"
+    echo "  Debian/Ubuntu: sudo apt-get install libcap2-bin"
+    echo "  RHEL/CentOS/Fedora: sudo yum install libcap"
+    echo "  OpenSUSE: sudo zypper install libcap-progs"
+    echo ""
+    echo "Alternative: Run SmogPing as root (not recommended) or use sudo:"
+    echo "  sudo /usr/bin/smogping"
+    echo ""
+    echo "After installing libcap utilities, run:"
+    echo "  sudo setcap cap_net_raw=+ep /usr/bin/smogping"
+fi
 
 # Install webapp files
 echo "Installing webapp files..."
@@ -125,7 +142,7 @@ if command -v apache2 >/dev/null 2>&1 || command -v httpd >/dev/null 2>&1; then
     fi
 else
     echo "Apache not detected. Configuration saved to /usr/share/doc/smogping/smogping-apache.conf"
-    sudo install -m 0644 apache.conf /usr/share/doc/smogping/smogping-apache.conf
+    sudo install -m 0644 smogping-apache.conf /usr/share/doc/smogping/smogping-apache.conf
 fi
 
 echo ""
@@ -146,7 +163,6 @@ echo "2. Edit /etc/smogping/targets.toml with your monitoring targets"
 echo "3. Configure webapp at /etc/smogping/webapp.config.php"
 echo "4. (Optional) Edit /etc/sysconfig/smogping for service options"
 echo "5. Enable Apache configuration (see messages above)"
-echo "6. Enable and start the SmogPing service:"
 echo "6. Enable and start the SmogPing service:"
 echo "   sudo systemctl enable smogping"
 echo "   sudo systemctl start smogping"

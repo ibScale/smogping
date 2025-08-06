@@ -1,19 +1,15 @@
 # SmogPing service configuration
 # This file is sourced by the systemd service unit
 
-# Configuration file path
+# Configuration file path (modify if you moved the config file)
 CONFIG_FILE="/etc/smogping/config.toml"
 
-# Targets file path
+# Targets file path (modify if you moved the targets file)
 TARGETS_FILE="/etc/smogping/targets.toml"
 
 # Additional command line options
 # Examples:
-# - Enable debug: -debug
-# - Disable Alarm: -noalarm
-# - Disable Log: -nolog
+# SMOGPING_OPTIONS="-debug"
+# SMOGPING_OPTIONS="-noalarm -nolog"
 SMOGPING_OPTIONS=""
 
-# Complete command line arguments (automatically constructed)
-# Do not modify this line directly - modify the variables above instead
-SMOGPING_ARGS="-c ${CONFIG_FILE} -t ${TARGETS_FILE} ${SMOGPING_OPTIONS}"
