@@ -69,7 +69,8 @@ sudo cp -r webapp /usr/share/smogping/
 # Install configuration files
 echo "Installing configuration files..."
 sudo install -m 0644 config.default.toml /etc/smogping/config.default.toml
-sudo install -m 0644 targets.toml /etc/smogping/targets.toml.example
+sudo install -m 0644 targets.example.toml /etc/smogping/targets.example.toml
+sudo install -m 0644 webapp/config.example.php /etc/smogping/config.example.php
 
 # Create default config files if they don't exist
 if [[ ! -f /etc/smogping/config.toml ]]; then
@@ -77,14 +78,12 @@ if [[ ! -f /etc/smogping/config.toml ]]; then
     echo "Created default /etc/smogping/config.toml"
 fi
 if [[ ! -f /etc/smogping/targets.toml ]]; then
-    sudo cp targets.toml /etc/smogping/targets.toml
+    sudo cp targets.example.toml /etc/smogping/targets.toml
     echo "Created default /etc/smogping/targets.toml"
 fi
-
-# Install webapp config
-if [[ -f webapp/config.php ]]; then
-    sudo install -m 0644 webapp/config.php /etc/smogping/webapp.config.php
-    echo "Installed webapp configuration"
+if [[ ! -f /etc/smogping/config.php ]]; then
+    sudo cp config.example.php /etc/smogping/config.php
+    echo "Created default /etc/smogping/config.php"
 fi
 
 # Install sysconfig file
@@ -100,9 +99,7 @@ sudo systemctl daemon-reload
 echo "Setting file ownership..."
 sudo chown smogping:smogping /etc/smogping/config.toml
 sudo chown smogping:smogping /etc/smogping/targets.toml
-if [[ -f /etc/smogping/webapp.config.php ]]; then
-    sudo chown smogping:smogping /etc/smogping/webapp.config.php
-fi
+sudo chown smogping:smogping /etc/smogping/config.php
 sudo chown -R smogping:smogping /var/lib/smogping
 
 # Install documentation
