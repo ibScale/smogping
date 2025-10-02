@@ -88,7 +88,7 @@ fi
 
 # Install sysconfig file
 echo "Installing service configuration..."
-sudo install -m 0644 smogping.sysconfig /etc/sysconfig/smogping
+sudo install -m 0644 sysconfig.smogping /etc/sysconfig/smogping
 
 # Install systemd service
 echo "Installing systemd service..."
