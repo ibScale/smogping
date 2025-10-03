@@ -77,7 +77,7 @@
     
     # Social Media
     { name = "Facebook", ip = "facebook.com", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
-    { name = "Twitter/X", ip = "x.com", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    { name = "X Twitter", ip = "x.com", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
     { name = "LinkedIn", ip = "linkedin.com", alarmping = 250, alarmloss = 5, alarmjitter = 125 },
     
     # Tech Companies
@@ -90,10 +90,10 @@
   [organizations.InternetInfrastructure]
   hosts = [
     # Root DNS Servers (A-M)
-    { name = "Root A (VeriSign)", ip = "198.41.0.4", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
-    { name = "Root B (USC-ISI)", ip = "199.9.14.201", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
-    { name = "Root C (Cogent)", ip = "192.33.4.12", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
-    { name = "Root D (UMD)", ip = "199.7.91.13", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    { name = "Root A VeriSign", ip = "198.41.0.4", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    { name = "Root B USC-ISI", ip = "199.9.14.201", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    { name = "Root C Cogent", ip = "192.33.4.12", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    { name = "Root D UMD", ip = "199.7.91.13", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
     
     # Internet Exchange Points (Public IPs)
     { name = "DE-CIX Frankfurt", ip = "80.81.192.30", alarmping = 300, alarmloss = 5, alarmjitter = 150 },
@@ -141,32 +141,16 @@
   hosts = [
     # Tier 1 Providers
     { name = "Verizon Business", ip = "4.69.202.123", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
-    { name = "AT&T", ip = "12.0.1.1", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
-    { name = "Level3/CenturyLink", ip = "4.2.2.1", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
+    { name = "ATT", ip = "12.0.1.1", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
+    { name = "Level3 CenturyLink", ip = "4.2.2.1", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
     { name = "NTT Communications", ip = "129.250.35.250", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
     { name = "Cogent", ip = "38.104.1.1", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
     
     # Major Regional ISPs
     { name = "Hurricane Electric", ip = "74.82.42.42", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
-    { name = "GTT (Tinet)", ip = "141.136.1.1", alarmping = 200, alarmloss = 5, alarmjitter = 100 }
+    { name = "GTT Tinet", ip = "141.136.1.1", alarmping = 200, alarmloss = 5, alarmjitter = 100 }
   ]
 
-  # Local Infrastructure Examples (Customize these for your environment)
-  [organizations.LocalInfrastructure]
-  hosts = [
-    # Gateway and Router Examples
-    { name = "Default Gateway", ip = "192.168.1.1", alarmping = 50, alarmloss = 1, alarmjitter = 25, alarmreceiver = "./alarmreceiver.sh" },
-    { name = "Secondary Router", ip = "192.168.1.2", alarmping = 50, alarmloss = 1, alarmjitter = 25 },
-    
-    # Local Servers Examples
-    { name = "Mail Server", ip = "mail.company.local", alarmping = 100, alarmloss = 2, alarmjitter = 50, alarmreceiver = "./alarmreceiver.sh" },
-    { name = "Web Server", ip = "web.company.local", alarmping = 100, alarmloss = 2, alarmjitter = 50, alarmreceiver = "./alarmreceiver.sh" },
-    { name = "Database Server", ip = "db.company.local", alarmping = 100, alarmloss = 2, alarmjitter = 50, alarmreceiver = "./alarmreceiver.sh" },
-    
-    # Network Equipment Examples
-    { name = "Core Switch", ip = "192.168.10.1", alarmping = 50, alarmloss = 1, alarmjitter = 25, alarmreceiver = "./alarmreceiver.sh" },
-    { name = "Wireless Controller", ip = "192.168.20.1", alarmping = 100, alarmloss = 2, alarmjitter = 50 }
-  ]
 
 # Alarm Threshold Guidelines:
 # - alarmping: Milliseconds (typical ranges: 50-500ms)
