@@ -8,7 +8,7 @@
 [organizations]
 
   # Public DNS Servers - Essential for internet connectivity monitoring
-  [organizations.PublicDNS]
+  [organizations.DNS]
   hosts = [
     # Google DNS
     { name = "Google DNS Primary", ip = "8.8.8.8", alarmping = 100, alarmloss = 2, alarmjitter = 50 },
@@ -27,48 +27,8 @@
     { name = "OpenDNS Secondary", ip = "208.67.220.220", alarmping = 150, alarmloss = 3, alarmjitter = 75 }
   ]
 
-  # Cloud Provider Endpoints - Monitor major cloud services
-  [organizations.CloudProviders]
-  hosts = [
-    # AWS
-    { name = "AWS US-East-1", ip = "ec2.us-east-1.amazonaws.com", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
-    { name = "AWS US-West-2", ip = "ec2.us-west-2.amazonaws.com", alarmping = 250, alarmloss = 5, alarmjitter = 125 },
-    { name = "AWS Europe", ip = "ec2.eu-west-1.amazonaws.com", alarmping = 300, alarmloss = 5, alarmjitter = 150 },
-    
-    # Google Cloud
-    { name = "Google Cloud US", ip = "compute.googleapis.com", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
-    { name = "Google Cloud Europe", ip = "europe-west1-a.gce.cloud.google.com", alarmping = 300, alarmloss = 5, alarmjitter = 150 },
-    
-    # Microsoft Azure
-    { name = "Azure US East", ip = "eastus.cloudapp.azure.com", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
-    { name = "Azure Europe", ip = "westeurope.cloudapp.azure.com", alarmping = 300, alarmloss = 5, alarmjitter = 150 },
-    
-    # DigitalOcean
-    { name = "DigitalOcean NYC", ip = "nyc1.digitaloceanspaces.com", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
-    { name = "DigitalOcean SFO", ip = "sfo2.digitaloceanspaces.com", alarmping = 200, alarmloss = 5, alarmjitter = 100 }
-  ]
-
-  # Content Delivery Networks (CDNs)
-  [organizations.CDNProviders]
-  hosts = [
-    # Cloudflare
-    { name = "Cloudflare Edge", ip = "cloudflare.com", alarmping = 100, alarmloss = 2, alarmjitter = 50 },
-    
-    # AWS CloudFront
-    { name = "AWS CloudFront", ip = "d1234567890123.cloudfront.net", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
-    
-    # Fastly
-    { name = "Fastly CDN", ip = "fastly.com", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
-    
-    # KeyCDN
-    { name = "KeyCDN", ip = "keycdn.com", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
-    
-    # MaxCDN/StackPath
-    { name = "StackPath CDN", ip = "stackpath.com", alarmping = 200, alarmloss = 5, alarmjitter = 100 }
-  ]
-
   # Major Website Endpoints - Monitor popular services
-  [organizations.MajorWebsites]
+  [organizations.Websites]
   hosts = [
     # Search Engines
     { name = "Google", ip = "google.com", alarmping = 100, alarmloss = 2, alarmjitter = 50 },
@@ -86,42 +46,8 @@
     { name = "Reddit", ip = "reddit.com", alarmping = 300, alarmloss = 10, alarmjitter = 150 }
   ]
 
-  # Internet Infrastructure - Root servers and key infrastructure
-  [organizations.InternetInfrastructure]
-  hosts = [
-    # Root DNS Servers (A-M)
-    { name = "Root A VeriSign", ip = "198.41.0.4", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
-    { name = "Root B USC-ISI", ip = "199.9.14.201", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
-    { name = "Root C Cogent", ip = "192.33.4.12", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
-    { name = "Root D UMD", ip = "199.7.91.13", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
-    
-    # Internet Exchange Points (Public IPs)
-    { name = "DE-CIX Frankfurt", ip = "80.81.192.30", alarmping = 300, alarmloss = 5, alarmjitter = 150 },
-    { name = "AMS-IX Amsterdam", ip = "80.249.208.1", alarmping = 300, alarmloss = 5, alarmjitter = 150 },
-    
-    # Time Servers
-    { name = "NIST Time Server", ip = "time.nist.gov", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
-    { name = "Pool NTP", ip = "pool.ntp.org", alarmping = 200, alarmloss = 5, alarmjitter = 100 }
-  ]
-
-  # Network Monitoring Services
-  [organizations.MonitoringServices]
-  hosts = [
-    # Speed Test Services
-    { name = "Speedtest.net", ip = "speedtest.net", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
-    { name = "Fast.com", ip = "fast.com", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
-    
-    # Network Tools
-    { name = "Looking Glass", ip = "lg.he.net", alarmping = 250, alarmloss = 5, alarmjitter = 125 },
-    { name = "Ping Test", ip = "ping.online.net", alarmping = 300, alarmloss = 10, alarmjitter = 150 },
-    
-    # Public Monitoring
-    { name = "Pingdom", ip = "pingdom.com", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
-    { name = "UptimeRobot", ip = "uptimerobot.com", alarmping = 250, alarmloss = 5, alarmjitter = 125 }
-  ]
-
   # Geographic Diversity - Test connectivity to different regions
-  [organizations.GeographicEndpoints]
+  [organizations.Geographic]
   hosts = [
     # North America
     { name = "Level3 Chicago", ip = "4.2.2.1", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
@@ -137,7 +63,7 @@
   ]
 
   # ISP and Tier 1 Providers
-  [organizations.ISPTier1]
+  [organizations.ISP]
   hosts = [
     # Tier 1 Providers
     { name = "Verizon Business", ip = "4.69.202.123", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
@@ -146,9 +72,24 @@
     { name = "NTT Communications", ip = "129.250.35.250", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
     { name = "Cogent", ip = "38.104.1.1", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
     
-    # Major Regional ISPs
+    # Major US Consumer ISPs
+    { name = "Comcast", ip = "68.87.64.146", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
+    { name = "Charter Spectrum", ip = "209.18.47.61", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
+    { name = "Cox Communications", ip = "68.230.200.12", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
+    { name = "Altice USA", ip = "167.206.6.6", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
+    
+    # Canadian ISPs
+    { name = "Rogers Canada", ip = "64.71.255.204", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    { name = "Bell Canada", ip = "64.230.128.1", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    { name = "Telus", ip = "154.11.255.204", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    { name = "Shaw Canada", ip = "64.59.144.22", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    
+    # Major Regional/Enterprise ISPs
     { name = "Hurricane Electric", ip = "74.82.42.42", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
-    { name = "GTT Tinet", ip = "141.136.1.1", alarmping = 200, alarmloss = 5, alarmjitter = 100 }
+    { name = "GTT Tinet", ip = "141.136.1.1", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    { name = "Zayo", ip = "64.125.28.4", alarmping = 150, alarmloss = 3, alarmjitter = 75 },
+    { name = "Windstream", ip = "208.42.224.1", alarmping = 200, alarmloss = 5, alarmjitter = 100 },
+    { name = "Frontier", ip = "74.40.74.1", alarmping = 200, alarmloss = 5, alarmjitter = 100 }
   ]
 
 
